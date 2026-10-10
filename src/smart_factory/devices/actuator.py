@@ -18,7 +18,7 @@ class Actuator(Device):
         """ Invoke an action on the actuator """
         raise NotImplementedError("This method should be overridden by subclasses")
 
-    def get_measurement_dict(self) -> dict:
+    def get_status_dict(self) -> dict:
         """ Returns a dictionary representation of the Actuator Status (e.g., the last status) """
         return {
             "device_id": self.device_id,

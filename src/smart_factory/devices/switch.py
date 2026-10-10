@@ -26,10 +26,11 @@ class Switch(Actuator):
 
         # Check if action_type Type and payload are Strings
         if not isinstance(action_type, str) or not isinstance(payload, str):
-            raise ValueError("Action type and payload must be strings")
+            raise TypeError("Action type and payload must be strings")
 
         # Check the action type and payload
         if action_type.upper() == Switch.ACTION_TYPE_SWITCH and payload.upper() in [Switch.STATUS_ON, Switch.STATUS_OFF]:
             self.status = payload
+            self.timestamp = int(time.time() * 1000)
         else:
             raise ValueError("Unsupported action type")

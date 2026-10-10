@@ -34,12 +34,12 @@ def main() -> None:
     production_line_1.stop()
 
     # Print collected measurements and variations
-    devices_descriptions = storage_manager.get_all_device_descriptions()
+    devices_descriptions = storage_manager.get_all_devices_description()
     for device_id, device_description in devices_descriptions.items():
         print(f"Device Description - DeviceId: {device_id} - Description: {device_description}")
 
     # Print collected measurements and variations
-    measurements = storage_manager.get_all_measurements()
+    measurements = storage_manager.get_all_devices_status()
     for device_id, device_measurements in measurements.items():
         for measurement in device_measurements:
             print(f"Device {device_id} - Measurement: {measurement}")

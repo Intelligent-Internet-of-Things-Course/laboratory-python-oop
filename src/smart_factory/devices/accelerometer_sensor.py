@@ -10,7 +10,10 @@ class AccelerometerSensor(Sensor):
     SENSOR_TYPE: str = "iot.sensor.accelerometer"
 
     # Sensor Value Unit
-    ACCELERATION_UNIT: str = "Acceleration"
+    ACCELERATION_UNIT: str = "g" 
+    """ We could also use a different unit of measurement, the International System, for example,
+        recognizes m/s² as the unit for acceleration. """
+    
 
     def __init__(self, device_id: str):
         """ Initialize the temperature sensor with a devices ID and an initial temperature """
@@ -32,9 +35,9 @@ class AccelerometerSensor(Sensor):
     def update_measurement(self) -> None:
         """ Update the measurement of the sensor with a random increment """
 
-        self.value['x_axis'] = randint(-400, 400)
-        self.value['y_axis'] = randint(-400, 400)
-        self.value['z_axis'] = randint(-400, 400)
+        self.value['x_axis'] = randint(-10, 10)
+        self.value['y_axis'] = randint(-10, 10)
+        self.value['z_axis'] = randint(-10, 10)
 
         # Set the timestamp of the last measurement in milliseconds
         self.timestamp = int(time.time() * 1000)

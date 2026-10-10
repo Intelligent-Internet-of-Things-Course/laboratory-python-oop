@@ -42,7 +42,7 @@ class ProductionLine:
             self.storage_manager.store_device_description(industrial_machine.device_id, industrial_machine.get_json_description())
 
         else:
-            raise ValueError("Wrong type for industrial_machine parameter ! Expected is IndustrialMachine ...")
+            raise TypeError("Wrong type for industrial_machine parameter ! Expected is IndustrialMachine ...")
 
     def remove_industrial_machine(self, industrial_machine_id: str) -> None:
         """ Remove a machine from the production line """
@@ -88,7 +88,7 @@ class ProductionLine:
         self.line_update_timestamp = int(time.time() * 1000)
 
         # Save the updated measurement in the storage manager
-        self.storage_manager.store_measurement(self.line_id, self.get_json_measurement())
+        self.storage_manager.store_device_status(self.line_id, self.get_json_status())
 
     def stop(self) -> None:
         """Stopping the machines associated to the production line"""
@@ -104,9 +104,9 @@ class ProductionLine:
         self.line_update_timestamp = int(time.time() * 1000)
 
         # Save the updated measurement in the storage manager
-        self.storage_manager.store_measurement(self.line_id, self.get_json_measurement())
+        self.storage_manager.store_device_status(self.line_id, self.get_json_status())
 
-    def get_json_measurement(self) -> str:
+    def get_json_status(self) -> str:
         """Return a JSON Measurement for the Production Line."""
 
         result_dict = {
@@ -152,7 +152,7 @@ class ProductionLine:
                 machine.update_measurements()
 
                 # Save the updated measurement
-                self.storage_manager.store_measurement(machine.device_id, machine.get_json_measurement())
+                self.storage_manager.store_device_status(machine.device_id, machine.get_json_status())
 
                 # Flip a coin and decide to switch the light on or off
                 random_value = random()
@@ -174,7 +174,7 @@ class ProductionLine:
                     print(f"Actuator {machine.switch.device_id} for Machine: {machine.device_id} status changed from {original_status} to {new_device_status}")
 
                     # Save the updated measurement
-                    self.storage_manager.store_measurement(machine.device_id, machine.get_json_measurement())
+                    self.storage_manager.store_device_status(machine.device_id, machine.get_json_status())
 
 
 

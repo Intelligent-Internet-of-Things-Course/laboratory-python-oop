@@ -58,22 +58,22 @@ class IndustrialMachine(Device):
             "accelerometer_sensor_list": accelerometer_description_list
         }
 
-    def get_measurement_dict(self) -> dict:
+    def get_status_dict(self) -> dict:
         """Return the last values of each device of the Industrial Machine as a dictionary
         This implementation is custom with respect to the default implementation in the Device class
         since it includes the measurements of the accelerometer sensors, the energy sensor, the switch actuator
-        and the machine id. The json.dumps() of the base get_json_measurement() is applied only once
+        and the machine id. The json.dumps() of the base get_json_status() is applied only once
         on the whole dictionary, so nested devices are serialized as JSON objects and not as JSON strings"""
 
         # Collect the last measurement of each accelerometer sensor
         accelerometer_measurement_list = []
         for acc_sensor in self.accelerometer_sensor_list:
-            accelerometer_measurement_list.append(acc_sensor.get_measurement_dict())
+            accelerometer_measurement_list.append(acc_sensor.get_status_dict())
 
-        return {
+        return {       
             "machine_id": self.device_id,
-            "switch": self.switch.get_measurement_dict(),
-            "energy_sensor": self.energy_sensor.get_measurement_dict(),
+            "switch": self.switch.get_status_dict(),
+            "energy_sensor": self.energy_sensor.get_status_dict(),
             "accelerometer_sensor_list": accelerometer_measurement_list
         }
 
